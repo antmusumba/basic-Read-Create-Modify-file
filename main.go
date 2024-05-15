@@ -20,7 +20,7 @@ func main() {
 		}
 		defer file.Close()
 
-		if _, err := file.WriteString(os.Args[1]); err != nil {
+		if _, err := file.WriteString(os.Args[1] + "\n"); err != nil {
 			fmt.Printf("Error writing to file: %v\n", err)
 			return
 		}
@@ -29,9 +29,29 @@ func main() {
 	} else {
 		if os.Args[2] == "--upper" {
 			n ,_ := os.ReadFile(os.Args[1])
-			n2 := string(n)
+			n2 := string(n) 
 
 			fileContent := strings.ToUpper(n2)
+			if err := os.WriteFile(os.Args[1], []byte(fileContent), 0644); err != nil {
+				fmt.Printf("Error writing to file: %v\n", err)
+				return
+			}
+			fmt.Printf("File %s has been modified to uppercase.\n", os.Args[1])
+		} else if  os.Args[2] == "--cap" {
+			n ,_ := os.ReadFile(os.Args[1])
+			n2 := string(n) 
+
+			fileContent := strings.Title(n2)
+			if err := os.WriteFile(os.Args[1], []byte(fileContent), 0644); err != nil {
+				fmt.Printf("Error writing to file: %v\n", err)
+				return
+			}
+			fmt.Printf("File %s has been modified to uppercase.\n", os.Args[1])
+		} else if os.Args[2] == "--low" {
+			n ,_ := os.ReadFile(os.Args[1])
+			n2 := string(n) 
+
+			fileContent := strings.ToLower(n2)
 			if err := os.WriteFile(os.Args[1], []byte(fileContent), 0644); err != nil {
 				fmt.Printf("Error writing to file: %v\n", err)
 				return
