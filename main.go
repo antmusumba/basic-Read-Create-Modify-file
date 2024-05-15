@@ -13,14 +13,16 @@ func main() {
 	}
 
 	if strings.HasSuffix(os.Args[2], ".txt") {
-		file, err := os.OpenFile(os.Args[2], os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-		if err != nil {
-			fmt.Printf("Error opening file: %v\n", err)
-			return
-		}
-		defer file.Close()
+		// file, err := os.OpenFile(os.Args[2], os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+		// if err != nil {
+		// 	fmt.Printf("Error opening file: %v\n", err)
+		// 	return
+		// }
+		// defer file.Close()
 
-		if _, err := file.WriteString(os.Args[1] + "\n"); err != nil {
+		//if _, err := file.WriteString(os.Args[1] + "\n"); err != nil {
+			err := os.WriteFile(os.Args[2],[]byte(os.Args[1]),0o644)
+			if err != nil {
 			fmt.Printf("Error writing to file: %v\n", err)
 			return
 		}
