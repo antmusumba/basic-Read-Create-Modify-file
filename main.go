@@ -7,20 +7,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 3 {
-		fmt.Println("Usage: program_name <content> <filename>")
+	// Provide correct arguments
+	if len(os.Args[1:]) < 2 || len(os.Args[1:]) > 3 {
+		fmt.Println("Not enough arguments")
 		return
 	}
 
 	if strings.HasSuffix(os.Args[2], ".txt") {
-		// file, err := os.OpenFile(os.Args[2], os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-		// if err != nil {
-		// 	fmt.Printf("Error opening file: %v\n", err)
-		// 	return
-		// }
-		// defer file.Close()
-
-		//if _, err := file.WriteString(os.Args[1] + "\n"); err != nil {
 			err := os.WriteFile(os.Args[2],[]byte(os.Args[1]),0o644)
 			if err != nil {
 			fmt.Printf("Error writing to file: %v\n", err)
